@@ -17,19 +17,22 @@ async function run() {
   const page = await browser.newPage();
 
   // Navigate to the login page
-  await page.goto('https://www.pinterest.com/login/');
+  await page.goto('https://funko.com/login/');
 
-  await page.waitForSelector('#email');
-  await page.type('#email', process.env.PINTEREST_EMAIL);
-  await page.waitForSelector('#password');
-  await page.type('#password', process.env.POKEMON_PASSWORD);
+  // await page.screenshot({
+  //   path: 'testing.png',
+  //   fullPage: 'true',
+  // });
+  await page.waitForSelector('#login-form-email');
+  await page.type('#login-form-email', process.env.POKEMON_EMAIL);
+  await page.waitForSelector('#login-form-password');
+  await page.type('#login-form-password', process.env.POKEMON_PASSWORD);
 
-  await new Promise((resolve) => setTimeout(resolve, 3000));
-  await page.click('.RCK');
+  await page.click('.btn--ICBoB');
 
-  await page.waitForNavigation({ waitUntil: 'networkidle0' }); // Ensuring the page has fully loaded
+  // await page.waitForNavigation({ waitUntil: 'networkidle0' }); // Ensuring the page has fully loaded
 
-  await page.goto('https://www.pinterest.com/');
+  // await page.goto('https://funko.com/pop-luffy-gear-five/79321.html');
 
   // const selector = 'button[data-test="addToCartButton"]';
   // await page.waitForSelector(selector);
