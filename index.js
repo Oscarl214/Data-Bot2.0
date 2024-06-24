@@ -10,7 +10,7 @@ async function run() {
     headless: false,
     executablePath:
       'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe',
-    ignoreDefaultArgs: ['--disable-extensions'],
+    ignoreDefaultArgs: ['--disable-extensions', '--start-fullscreen'],
     userDataDir: 'C:/Users/lealo/AppData/Local/Google/Chrome/User Data',
     // args: ['--proxy-server=http://162.23.125.34:8080'],
   });
@@ -22,16 +22,18 @@ async function run() {
   await page.waitForSelector('#email');
   await page.type('#email', process.env.PINTEREST_EMAIL);
   await page.waitForSelector('#password');
-  await page.type('#password', process.env.POKEMON_PASSWORD);
+  await page.type('#password', process.env.PINTEREST_PASSWORD);
 
   await new Promise((resolve) => setTimeout(resolve, 3000));
   await page.click('.RCK');
 
   await page.waitForNavigation({ waitUntil: 'networkidle0' }); // Ensuring the page has fully loaded
 
-  await page.goto('https://www.pinterest.com/');
+  await page.goto('https://www.pinterest.com/OsWorld214/_created/');
 
-  // const selector = 'button[data-test="addToCartButton"]';
+  await new Promise((resolve) => setTimeout(resolve, 2000));
+
+  await page.click('.tBJ');
   // await page.waitForSelector(selector);
 
   // await page.$eval(selector, (button) => button.click());
@@ -39,7 +41,7 @@ async function run() {
   // Optionally, proceed to checkout and complete the purchase
 
   // Close the browser
-  await browser.close();
+  // await browser.close();
 }
 
 run().catch((error) => console.log('Error:', error));
